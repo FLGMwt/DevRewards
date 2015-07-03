@@ -4,7 +4,6 @@
         //'ngRoute',
         // Custom modules
         'rewardsServices'
-        // 3rd Party Modules
-        
+        // 3rd Party Modules        
     ]);
 })();

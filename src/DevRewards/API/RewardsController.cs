@@ -12,27 +12,24 @@ namespace DevRewards.API
     [Route("api/[controller]")]
     public class RewardsController : Controller
     {
-        static public List<Reward> _rewards = Enumerable.Range(1, 10)
-            .Select(a => new Reward
-            {
-                Id = a,
-                Name = $"Name for {a}",
-                Description = $"Description for {a}",
-                PointValue = a * 10
-            }).ToList();
+        private readonly DevRewardsContext _context;
+        public RewardsController(DevRewardsContext context)
+        {
+            _context = context;
+        }
 
         // GET: api/values
         [HttpGet]
         public IEnumerable<Reward> Get()
         {
-            return _rewards;
+            return _context.Rewards.ToList();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public Reward Get(int id)
         {
-            return _rewards.SingleOrDefault(a => a.Id == id);
+            return _context.Rewards.SingleOrDefault(a => a.Id == id);
         }
 
         //// POST api/values
