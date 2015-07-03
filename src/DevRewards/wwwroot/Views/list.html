@@ -1,13 +1,9 @@
-﻿<div ng-controller="rewardsController as c" class="container">
-    <button ng-click="toggleAdmin()"></button>
-    <h1>Hi!</h1>
+﻿<div ng-controller="rewardsController" class="container">
     <h2>{{title}}</h2>
     <div class="row">
         <ul class="rewards">
-            <li cls ng-repeat="reward in rewards" class="col-lg-4 text-center" style="border:1px dotted red">
-                <h3>{{reward.name}} - {{reward.pointValue}} points</h3>
-                <p>{{reward.description}}</p>
-
+            <li ng-repeat="reward in rewards" class="col-lg-4 text-center" style="border:1px dotted red">
+                <reward></reward>
             </li>
         </ul>
     </div>

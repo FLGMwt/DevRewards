@@ -11,7 +11,7 @@
                 beautify: true
             },
             my_target: {
-                files: { 'wwwroot/app.js': ['Scripts/app.js', 'Scripts/**/*.js'] }
+                files: { 'wwwroot/app.js': ['Scripts/tp/slabtext.min.js', 'Scripts/app.js', 'Scripts/**/*.js'] }
             }
         },
         watch: {

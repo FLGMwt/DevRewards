@@ -1,8 +1,6 @@
 ﻿(function () {
-    angular.module('rewardsServices', ['ngResource'])
+    angular.module('rewardsServices')
     .factory('Rewards', ['$resource', function ($resource) {
-        return $resource('/api/rewards/', {}, {
-            //query: { method: 'GET', params: {}, isArray: true }
-        });
+        return $resource('/api/rewards/', {}, {});
     }]);
 })();

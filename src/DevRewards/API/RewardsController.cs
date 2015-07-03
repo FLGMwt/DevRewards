@@ -13,6 +13,7 @@ namespace DevRewards.API
     public class RewardsController : Controller
     {
         private readonly DevRewardsContext _context;
+
         public RewardsController(DevRewardsContext context)
         {
             _context = context;

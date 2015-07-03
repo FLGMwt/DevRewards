@@ -12,6 +12,7 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.ConfigurationModel;
 using DevRewards.Models;
 using Microsoft.Data.Entity.SqlServer;
+using DevRewards.Services;
 
 namespace DevRewards
 {
@@ -41,6 +42,8 @@ namespace DevRewards
             services.AddEntityFramework()
                 .AddInMemoryStore()
                 .AddDbContext<DevRewardsContext>();
+
+            services.AddSingleton<IDevRewardsService, DevRewardsService>();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -68,6 +71,14 @@ namespace DevRewards
                         Description = $"Description for {a}",
                         PointValue = a * 10
                     }));
+
+                dbContext.Users.Add(new User
+                {
+                    Id = 1,
+                    Name = "Ann",
+                    Points = 100
+                });
+
                 await dbContext.SaveChangesAsync();
             }
         }
