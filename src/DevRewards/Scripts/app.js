@@ -1,12 +1,9 @@
 ﻿(function () {
-    'use strict';
-
-    angular.module('app', [
+    angular.module('rewardsApp', [
         // Angular modules 
-        'ngRoute',
-
-        // Custom modules 
-        'RewardService'
+        //'ngRoute',
+        // Custom modules
+        'rewardsServices'
         // 3rd Party Modules
         
     ]);
