@@ -72,6 +72,15 @@ namespace DevRewards
                         PointValue = a * 10
                     }));
 
+                dbContext.Feats.AddRange(Enumerable.Range(1, 10)
+                    .Select(a => new Feat
+                    {
+                        Id = a,
+                        Name = $"Feat Name for {a}",
+                        Description = $"Feat Description for {a}",
+                        PointValue = a * 10
+                    }));
+
                 dbContext.Users.Add(new User
                 {
                     Id = 1,

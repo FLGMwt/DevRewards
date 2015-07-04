@@ -1,6 +1,5 @@
 ﻿(function () {
     angular.module('rewardsApp').controller('rewardsController', ['$scope', 'Rewards', 'Claims', '$rootScope', function ($scope, Rewards, Claims, $rootScope) {
-        $scope.title = 'Rewards';
         $scope.rewards = Rewards.query();
         $scope.claimed = [];
         $scope.claim = function (rewardId) {

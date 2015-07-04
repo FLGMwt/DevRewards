@@ -11,5 +11,6 @@ namespace DevRewards.Services
         Task<Reward> GetRewardAsync(int id);
         Task<User> GetUserAsync(int id);
         Task<IEnumerable<Reward>> GetAllRewardsAsync();
+        Task<IEnumerable<Feat>> GetAllFeatsAsync();
     }
 }

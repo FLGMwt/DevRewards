@@ -29,5 +29,10 @@ namespace DevRewards.Services
         {
             return await _context.Rewards.ToListAsync();
         }
+
+        public async Task<IEnumerable<Feat>> GetAllFeatsAsync()
+        {
+            return await _context.Feats.ToListAsync();
+        }
     }
 }

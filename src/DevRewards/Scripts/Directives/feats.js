@@ -3,19 +3,19 @@
 
     angular
         .module('rewardsApp')
-        .directive('rewards', rewards);
+        .directive('feats', feats);
 
-    rewards.$inject = ['$window'];
+    feats.$inject = ['$window'];
     
-    function rewards ($window) {
+    function feats($window) {
         // Usage:
-        //     <reward></reward>
+        //     <feats></feats>
         // Creates:
         // 
         var directive = {
             link: link,
             restrict: 'E',
-            templateUrl: 'Views/rewardsList.html'
+            templateUrl: 'Views/featsList.html'
         };
         return directive;
 

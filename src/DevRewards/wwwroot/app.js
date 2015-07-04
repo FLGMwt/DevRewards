@@ -62,9 +62,12 @@
 }(jQuery), function() {
     angular.module("rewardsServices", [ "ngResource" ]), angular.module("rewardsApp", [ "rewardsServices" ]);
 }(), function() {
+    angular.module("rewardsApp").controller("featsController", [ "$scope", "Feats", function($scope, Feats) {
+        $scope.feats = Feats.query();
+    } ]);
+}(), function() {
     angular.module("rewardsApp").controller("rewardsController", [ "$scope", "Rewards", "Claims", "$rootScope", function($scope, Rewards, Claims, $rootScope) {
-        $scope.title = "Rewards", $scope.rewards = Rewards.query(), $scope.claimed = [], 
-        $scope.claim = function(rewardId) {
+        $scope.rewards = Rewards.query(), $scope.claimed = [], $scope.claim = function(rewardId) {
             var newClaim = new Claims({
                 userId: 1,
                 rewardId: rewardId
@@ -107,6 +110,18 @@
     angular.module("rewardsApp").directive("banner", banner), banner.$inject = [ "$window" ];
 }(), function() {
     "use strict";
+    function feats($window) {
+        function link(scope, element, attrs) {}
+        var directive = {
+            link: link,
+            restrict: "E",
+            templateUrl: "Views/featsList.html"
+        };
+        return directive;
+    }
+    angular.module("rewardsApp").directive("feats", feats), feats.$inject = [ "$window" ];
+}(), function() {
+    "use strict";
     function reward($window) {
         function link(scope, element, attrs) {}
         var directive = {
@@ -124,7 +139,7 @@
         var directive = {
             link: link,
             restrict: "E",
-            templateUrl: "Views/list.html"
+            templateUrl: "Views/rewardsList.html"
         };
         return directive;
     }
@@ -136,8 +151,12 @@
         }, {});
     } ]);
 }(), function() {
+    angular.module("rewardsServices").factory("Feats", [ "$resource", function($resource) {
+        return $resource("/api/Feats/", {}, {});
+    } ]);
+}(), function() {
     angular.module("rewardsServices").factory("Rewards", [ "$resource", function($resource) {
-        return $resource("/api/rewards/", {}, {});
+        return $resource("/api/Rewards/", {}, {});
     } ]);
 }(), function() {
     angular.module("rewardsServices").factory("Users", [ "$resource", function($resource) {
