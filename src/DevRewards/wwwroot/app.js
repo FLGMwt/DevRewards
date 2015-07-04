@@ -62,12 +62,26 @@
 }(jQuery), function() {
     angular.module("rewardsServices", [ "ngResource" ]), angular.module("rewardsApp", [ "rewardsServices" ]);
 }(), function() {
-    angular.module("rewardsApp").controller("rewardsController", [ "$scope", "Rewards", function($scope, Rewards) {
-        $scope.title = "Rewards", $scope.rewards = Rewards.query();
+    angular.module("rewardsApp").controller("rewardsController", [ "$scope", "Rewards", "Claims", function($scope, Rewards, Claims) {
+        $scope.title = "Rewards", $scope.rewards = Rewards.query(), $scope.claimed = [], 
+        $scope.claimedFoo = [], $scope.claim = function(rewardId) {
+            console.log("claimed: " + rewardId);
+            var newClaim = new Claims({
+                userId: 1,
+                rewardId: rewardId
+            });
+            newClaim.$save(function(claim, headers) {
+                $scope.claimedFoo[rewardId] = !0, $scope.$emit("rewardClaimed", {
+                    rewardId: claim.rewardId
+                });
+            }), $scope.claimed[rewardId] = !0;
+        };
     } ]);
 }(), function() {
     angular.module("rewardsApp").controller("userController", [ "$scope", "Users", function($scope, Users) {
-        console.log("before get");
+        $scope.$on("rewardClaimed", function(event, args) {
+            console.log("event found!");
+        }), console.log("before get");
         var user = Users.get({
             id: 1
         });

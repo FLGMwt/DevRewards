@@ -1,8 +1,8 @@
-﻿<div ng-controller="rewardsController" class="container">
+﻿<div ng-controller="rewardsController" class="rewards container">
     <h2>{{title}}</h2>
     <div class="row">
-        <ul class="rewards">
-            <li ng-repeat="reward in rewards" class="col-lg-4 text-center" style="border:1px dotted red">
+        <ul>
+            <li ng-repeat="reward in rewards" class="col-lg-4 text-center reward" style="border:1px dotted red">
                 <reward></reward>
             </li>
         </ul>

@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace DevRewards.Services
 {
-    public interface IDevRewardsService
-    {
-        Task<Reward> GetRewardAsync(int id);
-        Task<User> GetUserAsync(int id);
-    }
-
-
     public class DevRewardsService : IDevRewardsService
     {
         private readonly DevRewardsContext _context;
@@ -30,6 +23,11 @@ namespace DevRewards.Services
         public async Task<Reward> GetRewardAsync(int id)
         {
             return await _context.Rewards.SingleOrDefaultAsync(a => a.Id == id);
+        }
+
+        public async Task<IEnumerable<Reward>> GetAllRewardsAsync()
+        {
+            return await _context.Rewards.ToListAsync();
         }
     }
 }

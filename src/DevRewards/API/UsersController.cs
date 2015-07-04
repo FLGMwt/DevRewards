@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using DevRewards.Models;
+using DevRewards.Services;
 
 // For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,28 +13,25 @@ namespace DevRewards.API
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-        private readonly DevRewardsContext _context;
+        private readonly IDevRewardsService _service;
 
-        public UsersController(DevRewardsContext context)
+        public UsersController(IDevRewardsService service)
         {
-            _context = context;
+            _service = service;
         }
 
         // GET: api/values
         [HttpGet]
         public IEnumerable<User> Get()
         {
-            return _context.Users;
+            return null;
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public User Get(int id)
+        public async Task<User> Get(int id)
         {
-            var x = _context.Users.ToList<User>();
-            var u = x.SingleOrDefault(a => a.Id == id);
-            return u;
-            //return _context.Users.SingleOrDefault(a => a.Id == id);
+            return await _service.GetUserAsync(id);
         }
 
         // POST api/values

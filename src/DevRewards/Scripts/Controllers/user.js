@@ -1,5 +1,9 @@
 ﻿(function () {
     angular.module('rewardsApp').controller('userController', ['$scope', 'Users', function ($scope, Users) {
+        $scope.$on('rewardClaimed', function(event, args) {
+            console.log('event found!');
+        });
+
         console.log('before get');
         var user = Users.get({ id: 1 });
         console.log('after get');
