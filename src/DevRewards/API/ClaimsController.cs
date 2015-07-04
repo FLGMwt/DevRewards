@@ -38,9 +38,12 @@ namespace DevRewards.Controllers
         [HttpPost]
         public async Task Post([FromBody]Claim claim)
         {
-            var user = await _service.GetUserAsync(claim.UserId);
-            var reward = await _service.GetRewardAsync(claim.RewardId);
-            Task.Delay(500).Wait();
+            var userTask = _service.GetUserAsync(claim.UserId);
+            var rewardTask = _service.GetRewardAsync(claim.RewardId);
+            await Task.WhenAll(userTask, rewardTask);
+
+            var user = await userTask;
+            var reward = await rewardTask;
             if (user.Points >= reward.PointValue)
             {
                 user.Points -= reward.PointValue;

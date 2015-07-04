@@ -76,7 +76,7 @@ namespace DevRewards
                 {
                     Id = 1,
                     Name = "Ann",
-                    Points = 100
+                    Points = 100000
                 });
 
                 await dbContext.SaveChangesAsync();

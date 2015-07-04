@@ -1,19 +1,17 @@
 ﻿(function () {
-    angular.module('rewardsApp').controller('rewardsController', ['$scope', 'Rewards', 'Claims', function ($scope, Rewards, Claims) {
+    angular.module('rewardsApp').controller('rewardsController', ['$scope', 'Rewards', 'Claims', '$rootScope', function ($scope, Rewards, Claims, $rootScope) {
         $scope.title = 'Rewards';
         $scope.rewards = Rewards.query();
         $scope.claimed = [];
-        $scope.claimedFoo = [];
         $scope.claim = function (rewardId) {
-            console.log('claimed: ' + rewardId);
             var newClaim = new Claims({ userId: 1, rewardId: rewardId });
             newClaim.$save(function (claim, headers) {
-                $scope.claimedFoo[rewardId] = true;
-                $scope.$emit('rewardClaimed', {
+                $scope.claimed[rewardId] = true;
+
+                $rootScope.$broadcast('rewardClaimed', {
                     rewardId: claim.rewardId
                 });
             });;
-            $scope.claimed[rewardId] = true;
         }
     }]);
 })();

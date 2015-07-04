@@ -62,32 +62,34 @@
 }(jQuery), function() {
     angular.module("rewardsServices", [ "ngResource" ]), angular.module("rewardsApp", [ "rewardsServices" ]);
 }(), function() {
-    angular.module("rewardsApp").controller("rewardsController", [ "$scope", "Rewards", "Claims", function($scope, Rewards, Claims) {
+    angular.module("rewardsApp").controller("rewardsController", [ "$scope", "Rewards", "Claims", "$rootScope", function($scope, Rewards, Claims, $rootScope) {
         $scope.title = "Rewards", $scope.rewards = Rewards.query(), $scope.claimed = [], 
-        $scope.claimedFoo = [], $scope.claim = function(rewardId) {
-            console.log("claimed: " + rewardId);
+        $scope.claim = function(rewardId) {
             var newClaim = new Claims({
                 userId: 1,
                 rewardId: rewardId
             });
             newClaim.$save(function(claim, headers) {
-                $scope.claimedFoo[rewardId] = !0, $scope.$emit("rewardClaimed", {
+                $scope.claimed[rewardId] = !0, $rootScope.$broadcast("rewardClaimed", {
                     rewardId: claim.rewardId
                 });
-            }), $scope.claimed[rewardId] = !0;
+            });
         };
     } ]);
 }(), function() {
     angular.module("rewardsApp").controller("userController", [ "$scope", "Users", function($scope, Users) {
+        function setUser() {
+            console.log("before get");
+            var user = Users.get({
+                id: 1
+            });
+            console.log("after get"), console.log("user:" + JSON.stringify(user)), user.$promise.then(function(data) {
+                $scope.name = data.name, $scope.points = data.points;
+            });
+        }
         $scope.$on("rewardClaimed", function(event, args) {
-            console.log("event found!");
-        }), console.log("before get");
-        var user = Users.get({
-            id: 1
-        });
-        console.log("after get"), console.log("user:" + JSON.stringify(user)), user.$promise.then(function(data) {
-            $scope.name = data.name, $scope.points = data.points;
-        });
+            console.log("event found!"), setUser();
+        }), setUser();
     } ]);
 }(), function() {
     "use strict";
