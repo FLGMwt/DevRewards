@@ -1,7 +1,6 @@
 ﻿(function () {
     angular.module('rewardsApp').controller('rewardsController', ['$scope', 'Rewards', 'Claims', '$rootScope', function ($scope, Rewards, Claims, $rootScope) {
         $scope.rewards = Rewards.query();
-        $scope.claimed = 1;
         $scope.claim = function (rewardId) {
             var newClaim = new Claims({ userId: 1, rewardId: rewardId });
             newClaim.$save(function (claim, headers) {
