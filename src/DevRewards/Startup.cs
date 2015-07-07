@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Http;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Serialization;
-using Microsoft.Data.Entity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.ConfigurationModel;
 using DevRewards.Models;
@@ -63,13 +60,27 @@ namespace DevRewards
                     db.EnsureCreatedAsync().Wait();
                 }
 
-                dbContext.Rewards.AddRange(Enumerable.Range(1, 10)
+                var rewards = new[]
+                {
+                    new {name = "Apple", description = "You eat it" },
+                    new {name = "Lamp", description = "Bring me the ^" },
+                    new {name = "Coconuts", description = "A lovely bunch of them" },
+                    new {name = "Packages", description = "barely even human" },
+                    new {name = "A Chair", description = "It's what you sit in" },
+                    new {name = "Televison", description = "Watch it and your productivity melt like the timepieces of Dali" },
+                    new {name = "Chandelier", description = "Ooh, shiny" },
+                    new {name = "Blue Label Manhattan", description = "Drink of champions" },
+                    new {name = "Guitar", description = "Comes untuned" },
+                    new {name = "Apartment Complex", description = "Makes sense to make large investments with fake internet points, eh?" }
+                };
+
+                dbContext.Rewards.AddRange(Enumerable.Range(0, 10)
                     .Select(a => new Reward
                     {
-                        Id = a,
-                        Name = $"Name for {a}",
-                        Description = $"Description for {a}",
-                        PointValue = a * 10
+                        Id = a + 1,
+                        Name = rewards[a].name,
+                        Description = rewards[a].description,
+                        PointValue = (a + 1) * 10
                     }));
 
                 dbContext.Feats.AddRange(Enumerable.Range(1, 10)

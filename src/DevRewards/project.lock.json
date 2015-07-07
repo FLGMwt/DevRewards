@@ -3,8 +3,8 @@
   "version": -9998,
   "projectFileDependencyGroups": {
     "": [
-      "EntityFramework.InMemory >= 7.0.0-beta4",
       "EntityFramework >= 7.0.0-beta4",
+      "EntityFramework.InMemory >= 7.0.0-beta4",
       "EntityFramework.Commands >= 7.0.0-beta4",
       "Microsoft.AspNet.Server.IIS >= 1.0.0-beta4",
       "Microsoft.AspNet.Server.WebListener >= 1.0.0-beta4",

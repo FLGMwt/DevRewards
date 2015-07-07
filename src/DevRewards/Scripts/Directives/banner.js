@@ -1,6 +1,4 @@
-﻿(function() {
-    'use strict';
-
+﻿(function () {
     angular
         .module('rewardsApp')
         .directive('banner', banner);
@@ -8,10 +6,6 @@
     banner.$inject = ['$window'];
     
     function banner($window) {
-        // Usage:
-        //     <banner></banner>
-        // Creates:
-        // 
         var directive = {
             link: link,
             restrict: 'E',
@@ -20,8 +14,8 @@
         return directive;
 
         function link(scope, element, attrs) {
+            debugger;
             element.slabText();
         }
     }
-
 })();

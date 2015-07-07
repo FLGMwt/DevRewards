@@ -1,4 +1,4 @@
 ﻿<h3>{{reward.name}} - {{reward.pointValue}} points</h3>
 <p>{{reward.description}}</p>
 <button class="btn btn-default btn-lg" ng-click="claim(reward.id)">Claim this reward</button>
-<p ng-if="claimed && claimed[reward.id]" class="text-info">Reward claimed</p>
+<p ng-show="claimed && claimed == reward.id" class="text-info">Reward claimed</p>
